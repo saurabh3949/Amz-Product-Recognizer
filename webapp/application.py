@@ -72,22 +72,7 @@ label_to_class = cPickle.load(open('class_dict.pkl','rb'))
 
 
 print "Compiled all"
-def predict(x_cnn):
-    x_sentence = np.zeros((BATCH_SIZE, SEQUENCE_LENGTH - 1), dtype='int32')
-    words = []
-    i = 0
-    while True:
-        i += 1
-        p0 = f(x_cnn, x_sentence)
-        pa = p0.argmax(-1)
-        tok = pa[0][i]
-        word = index_to_word[tok]
-        if word == '#END#' or i >= SEQUENCE_LENGTH - 1:
-            return ' '.join(words)
-        else:
-            x_sentence[0][i] = tok
-            if word != '#START#':
-                words.append(word)
+
 
 def downloadImages(urls, path):
     if not os.path.exists(path):
